@@ -12,6 +12,16 @@ services:
       - '4306:3306'
     volumes:
       - ./mysql:/var/lib/mysql
+  phpmyadmin:
+    image: phpmyadmin:5.2
+    restart: always
+    depends_on:
+      - database
+    environment:
+      PMA_HOST: database
+      MYSQL_ROOT_PASSWORD: secret
+    ports:
+      - "8081:80"
   php:
     container_name: php
     build:
